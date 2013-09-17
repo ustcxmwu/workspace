@@ -10,15 +10,17 @@
 
 all : gputest 
 
-main.o : main.c 
-	gcc -c main.c
+main.o : main.cu 
+	nvcc -c main.cu
 
 gpufunc.o : gpufunc.cu
 	nvcc -c gpufunc.cu
 
-gputest : main.o gpufunc.o
-	nvcc -o gputest main.o gpufunc.o
+kernel.o : kernel.cu
+	nvcc -c kernel.cu
 
+gputest : main.o gpufunc.o kernel.o
+	nvcc -o gputest main.o gpufunc.o kernel.o
 
 clean :
 	rm *.o gputest

@@ -6,18 +6,19 @@
  * Copyright (C) Advanced Network Management and Control Group of USTC
  */
 
-#include "gpufunc.h"
 #include "book.h"
+
+#include "version.h"
+
+#include "gpufunc.h"
+
+#include "kernel.h"
 
 #define N   10
 
-__global__ void add( int *a, int *b, int *c ) {
-    int tid = blockIdx.x;    // this thread handles the data at its thread id
-    if (tid < N)
-        c[tid] = a[tid] + b[tid];
-}
 
-extern "C" int test( void ) {
+#if version == GPU
+int test( void ) {
     int a[N], b[N], c[N];
     int *dev_a, *dev_b, *dev_c;
 
@@ -55,3 +56,9 @@ extern "C" int test( void ) {
 
     return 0;
 }
+#else
+int test(void)
+{
+	printf("only CPU function execution.\n");
+}
+#endif

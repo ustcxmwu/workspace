@@ -9,9 +9,7 @@
 #ifndef __GPUFUNC_H__
 #define __GPUFUNC_H__
 
-extern "C" int test(void);
-
-
+int test(void);
 
 #endif /* __GPUFUNC_H__ */
 
