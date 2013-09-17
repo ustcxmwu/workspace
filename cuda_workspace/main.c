@@ -7,11 +7,17 @@
  */
 
 #include <stdio.h>
-//#include "gpufunc.h"
+#include "gpufunc.h"
 
+#define version test
 
 int main()
 {
+#if version == test
+	printf("version:test.\n");
+#else
+	printf("version:none.\n");
+#endif
 	test();	
 	return 0;
 }
